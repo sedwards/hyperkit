@@ -1650,18 +1650,18 @@ vm_gla2gpa(struct vm *vm, int vcpuid, struct vm_guest_paging *paging,
     uint64_t gla, int prot, uint64_t *gpa, int *guest_fault)
 {
 	int nlevels, pfcode, ptpshift, ptpindex, retval, usermode, writable;
-	u_int retries;
+	//u_int retries;
 	uint64_t *ptpbase, ptpphys, pte, pgsize;
 	uint32_t *ptpbase32, pte32;
-	void *cookie;
+	//void *cookie;
 
 	*guest_fault = 0;
 
 	usermode = (paging->cpl == 3 ? 1 : 0);
 	writable = prot & XHYVE_PROT_WRITE;
-	cookie = NULL;
+	//cookie = NULL;
 	retval = 0;
-	retries = 0;
+	//retries = 0;
 	pte = 0;
 	pte32 = 0;
 	ptpshift = 0;

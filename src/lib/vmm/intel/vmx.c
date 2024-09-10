@@ -33,6 +33,8 @@
 #include <stdio.h>
 #include <errno.h>
 #include <assert.h>
+
+#ifndef __aarch64__
 #include <Hypervisor/hv.h>
 #include <Hypervisor/hv_vmx.h>
 #include <xhyve/support/misc.h>
@@ -698,6 +700,7 @@ vmx_vcpu_init(void *arg, int vcpuid) {
 static int
 vmx_handle_cpuid(struct vm *vm, int vcpuid)
 {
+#ifndef __aarch64__
 	uint32_t eax, ebx, ecx, edx;
 	int error;
 
@@ -714,6 +717,9 @@ vmx_handle_cpuid(struct vm *vm, int vcpuid)
 	reg_write(vcpuid, HV_X86_RDX, edx);
 
 	return (error);
+#else
+	return 0;
+#endif
 }
 
 static __inline void
@@ -2805,3 +2811,5 @@ struct vmm_ops vmm_ops_intel = {
 	vmx_vlapic_cleanup,
 	vmx_vcpu_interrupt
 };
+#endif
+

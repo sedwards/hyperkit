@@ -266,7 +266,7 @@ vmm_init(void)
 	if (error)
 		return (error);
 
-	ops = &vmm_ops_intel;
+	//ops = &vmm_ops_intel;
 
 	error = VMM_INIT();
 
@@ -884,6 +884,7 @@ vm_handle_hlt(struct vm *vm, int vcpuid, bool intr_disabled)
 		 */
 		if (intr_disabled) {
 			wmesg = "vmhalt";
+			printf("Current status is %s", wmesg);
 			VCPU_CTR0(vm, vcpuid, "Halted");
 			if (!vcpu_halted && halt_detection_enabled) {
 				vcpu_halted = 1;
@@ -894,6 +895,7 @@ vm_handle_hlt(struct vm *vm, int vcpuid, bool intr_disabled)
 				break;
 			}
 		} else {
+                        printf("Current status is %s", wmesg);
 			wmesg = "vmidle";
 		}
 
@@ -1009,11 +1011,11 @@ vm_handle_inst_emul(struct vm *vm, int vcpuid, bool *retu)
 static int
 vm_handle_suspend(struct vm *vm, int vcpuid, bool *retu)
 {
-	int i, done;
+	int i; //, done;
 	struct vcpu *vcpu;
 	const struct timespec ts = {.tv_sec = 1, .tv_nsec = 0}; /* 1 second */
 
-	done = 0;
+	//done = 0;
 	vcpu = &vm->vcpu[vcpuid];
 
 	CPU_SET_ATOMIC(((unsigned) vcpuid), &vm->suspended_cpus);

@@ -29,6 +29,7 @@
 
 #include <stdint.h>
 #include <strings.h>
+#ifndef __x86_64__
 #include <xhyve/support/misc.h>
 #include <xhyve/support/atomic.h>
 #include <xhyve/support/specialreg.h>
@@ -476,3 +477,4 @@ x86_emulate_cpuid(struct vm *vm, int vcpu_id,
 
 	return (1);
 }
+#endif /* __x86_64__ */

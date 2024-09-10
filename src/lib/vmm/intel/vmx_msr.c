@@ -57,6 +57,7 @@ vmx_ctl_allows_zero_setting(uint64_t msr_val, int bitpos)
 		return (FALSE);
 }
 
+#ifndef __arm64__
 int vmx_set_ctlreg(hv_vmx_capability_t cap_field, uint32_t ones_mask,
 	uint32_t zeros_mask, uint32_t *retval)
 {
@@ -113,7 +114,7 @@ int vmx_set_ctlreg(hv_vmx_capability_t cap_field, uint32_t ones_mask,
 
 	return (0);
 }
-
+#endif
 static uint64_t misc_enable;
 static uint64_t platform_info;
 static uint64_t turbo_ratio_limit;
@@ -202,6 +203,7 @@ vmx_msr_init(void) {
 	}
 }
 
+#ifndef __arm64__
 void
 vmx_msr_guest_init(struct vmx *vmx, int vcpuid)
 {
@@ -351,3 +353,5 @@ vmx_wrmsr(struct vmx *vmx, int vcpuid, u_int num, uint64_t val)
 
 	return (error);
 }
+#endif
+

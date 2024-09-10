@@ -35,10 +35,7 @@ CFLAGS_OPT := \
 
 # enable everything and then selectively disable some warnings
 CFLAGS_WARN := \
-  -Weverything \
-  -Werror \
-  -pedantic \
-  \
+  -Wno-implicit-function-declaration \
   -Wno-dollar-in-identifier-extension \
   -Wno-gnu-statement-expression \
   -Wno-packed \
@@ -59,7 +56,6 @@ CFLAGS_DBG := \
   -g
 
 CFLAGS := \
-  -arch x86_64 \
   -x c \
   -std=c11 \
   -fno-common \
@@ -78,7 +74,6 @@ LDFLAGS_DBG := \
   -Xlinker -object_path_lto
 
 LDFLAGS := \
-  -arch x86_64 \
   -framework Hypervisor \
   -framework vmnet \
   -Wl,-no_compact_unwind \

@@ -254,12 +254,13 @@ block_delete(struct blockif_ctxt *bc, off_t offset, off_t len)
 		assert (len >= 0);
 		size_t fp_offset = (size_t) offset;
 		size_t fp_length = (size_t) len;
+		ssize_t written;
 
 		size_t aligned_offset = ALIGNUP(fp_offset, bc->bc_delete_alignment);
 		if (aligned_offset != fp_offset) {
 			size_t len_to_zero = MIN(fp_length, aligned_offset - fp_offset);
 			assert(len_to_zero < bc->bc_delete_alignment);
-			ssize_t written = pwrite(bc->bc_fd, bc->bc_delete_zero_buf,
+                           written = pwrite(bc->bc_fd, bc->bc_delete_zero_buf,
 				len_to_zero, (off_t)fp_offset);
 			if (written == -1) goto out;
 			fp_offset += len_to_zero;

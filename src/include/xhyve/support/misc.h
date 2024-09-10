@@ -54,6 +54,7 @@ typedef	unsigned short u_short;
 typedef	unsigned int u_int;
 typedef	unsigned long u_long;
 
+#if 0
 static inline void cpuid_count(uint32_t ax, uint32_t cx, uint32_t *p) {
 	__asm__ __volatile__ ("cpuid"
 		: "=a" (p[0]), "=b" (p[1]), "=c" (p[2]), "=d" (p[3])
@@ -65,6 +66,7 @@ static inline void do_cpuid(unsigned ax, unsigned *p) {
 		: "=a" (p[0]), "=b" (p[1]), "=c" (p[2]), "=d" (p[3])
 		:  "0" (ax));
 }
+#endif
 
 /* Used to trigger a self-shutdown */
 extern void push_power_button(void);

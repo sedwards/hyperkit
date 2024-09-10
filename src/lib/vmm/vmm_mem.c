@@ -29,6 +29,9 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <mach/mach.h>
+#include <Hypervisor/Hypervisor.h>
+
 #include <Hypervisor/hv.h>
 #include <Hypervisor/hv_vmx.h>
 #include <xhyve/support/misc.h>
